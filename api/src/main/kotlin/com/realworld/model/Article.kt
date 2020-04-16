@@ -1,15 +1,14 @@
 package com.realworld.model
 
-import com.fasterxml.jackson.annotation.JsonRootName
+import com.fasterxml.jackson.annotation.JsonTypeName
 import org.springframework.data.cassandra.core.mapping.PrimaryKey
 import org.springframework.data.cassandra.core.mapping.Table
 import java.time.LocalDateTime
 import java.util.*
 
 @Table
-@JsonRootName(value = "article")
 data class Article(
-        @PrimaryKey  val articleId: UUID,
+        @PrimaryKey val articleId: UUID,
         val slug: String,
         val title: String,
         val description: String,

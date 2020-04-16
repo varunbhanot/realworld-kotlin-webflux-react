@@ -1,6 +1,5 @@
 package com.realworld.web
 
-import com.realworld.model.Article
 import com.realworld.model.api.NewArticle
 import com.realworld.service.ArticleService
 import org.slf4j.LoggerFactory
@@ -28,8 +27,9 @@ class ArticleController(@Autowired val service: ArticleService) {
     //TODO Handle date format, author, pagination, security ,slug
     @PostMapping("/api/articles")
     @ResponseStatus(HttpStatus.CREATED)
-    fun newArticle(@RequestBody newArticle: NewArticle): Mono<Article> {
+    fun newArticle(@RequestBody newArticle: NewArticle): Mono<com.realworld.model.api.Article> {
         logger.info(newArticle.toString())
         return service.saveNewArticle(newArticle)
+                .map { com.realworld.model.api.Article.fromModel(it) }
     }
 }

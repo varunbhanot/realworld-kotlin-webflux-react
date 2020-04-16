@@ -1,6 +1,7 @@
 package com.realworld.service
 
 import com.datastax.driver.core.utils.UUIDs
+import com.github.slugify.Slugify
 import com.realworld.model.Article
 import com.realworld.model.api.NewArticle
 import com.realworld.repository.ArticleRepository
@@ -24,7 +25,7 @@ class ArticleService(private val repository: ArticleRepository) {
         return newArticle.let {
             repository.insert(Article(
                     UUIDs.random(),
-                    "",
+                    Slugify().slugify(it.title),
                     it.title!!,
                     it.description!!,
                     it.body!!,
