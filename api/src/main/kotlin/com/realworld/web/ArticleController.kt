@@ -7,29 +7,35 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
+import com.realworld.model.api.Article as ArticleIO
 import com.realworld.model.api.Articles as ArticlesIO
 
-@RestController
+@RestController()
 class ArticleController(@Autowired val service: ArticleService) {
 
     private val logger = LoggerFactory.getLogger(ArticleController::class.java)
 
-    //TODO Handle date format, author, pagination, security
+    //TODO pagination,security
     @GetMapping("/api/articles")
     fun articles(): Mono<ArticlesIO> {
         logger.info("Getting all articles")
         return service
                 .getAllArticles()
                 .collectList()
-                .map { ArticlesIO(it, it.count()) }
+                .map { ArticlesIO(it.map { article -> ArticleIO.fromModel(article) }, it.count()) }
     }
 
-    //TODO Handle date format, author, pagination, security ,slug
+    //TODO  author, security, slug uniqueness
     @PostMapping("/api/articles")
     @ResponseStatus(HttpStatus.CREATED)
     fun newArticle(@RequestBody newArticle: NewArticle): Mono<com.realworld.model.api.Article> {
-        logger.info(newArticle.toString())
         return service.saveNewArticle(newArticle)
                 .map { com.realworld.model.api.Article.fromModel(it) }
+    }
+
+    @GetMapping("/api/articles/{slug}")
+    fun updateArticle(@PathVariable slug: String): Mono<ArticleIO> {
+        logger.info("Getting article for slug : $slug")
+        return service.getArticleBySlug(slug).map { ArticleIO.fromModel(it) }
     }
 }

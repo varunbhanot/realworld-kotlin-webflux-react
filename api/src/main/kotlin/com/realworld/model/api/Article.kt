@@ -17,13 +17,14 @@ data class Article(var title: String? = null,
                    var createdAt: String = "",
                    var updatedAt: String = "",
                    var favorited: Boolean = false,
-                   var favoritesCount: Int = 0) {
+                   var favoritesCount: Int = 0,
+                   var author: String = "") {
     companion object {
         fun dateFormat(date: OffsetDateTime): String {
             return date.toZonedDateTime().withZoneSameInstant(ZoneId.of("Z")).format(DateTimeFormatter.ISO_ZONED_DATE_TIME)
         }
 
-        fun fromModel(model: com.realworld.model.Article): Article {
+        fun fromModel(model: com.realworld.model.domain.article.Article): Article {
             return Article(
                     slug = model.slug,
                     title = model.title,
@@ -33,7 +34,9 @@ data class Article(var title: String? = null,
                     createdAt = dateFormat(OffsetDateTime.of(model.createdAt, ZoneOffset.UTC)),
                     updatedAt = dateFormat(OffsetDateTime.of(model.updatedAt, ZoneOffset.UTC)),
                     favorited = false,
-                    favoritesCount = 0)
+                    favoritesCount = 0,
+                    author = model.authorName
+            )
         }
     }
 }
