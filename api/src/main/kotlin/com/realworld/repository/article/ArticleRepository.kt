@@ -1,10 +1,10 @@
-package com.realworld.repository
+package com.realworld.repository.article
 
 import com.realworld.model.domain.article.Article
 import org.springframework.data.cassandra.repository.ReactiveCassandraRepository
-import reactor.core.publisher.Mono
+import reactor.core.publisher.Flux
 import java.util.*
 
 interface ArticleRepository : ReactiveCassandraRepository<Article, UUID> {
-    fun findBySlug(slug: String): Mono<Article>
+    fun findByTagListContaining(tag: String): Flux<Article>
 }

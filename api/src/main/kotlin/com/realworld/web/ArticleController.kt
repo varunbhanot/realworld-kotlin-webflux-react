@@ -17,10 +17,14 @@ class ArticleController(@Autowired val service: ArticleService) {
 
     //TODO pagination,security
     @GetMapping("/api/articles")
-    fun articles(): Mono<ArticlesIO> {
+    fun articles(@RequestParam tag: String?,
+                 @RequestParam favorited: String?): Mono<ArticlesIO> {
         logger.info("Getting all articles")
-        return service
-                .getAllArticles()
+        val articlesFlux = tag?.let { service.getArticlesByTag(it) }
+                ?: favorited?.let { service.getArticleByFavorited(it) }
+                ?: service.getAllArticles()
+
+        return articlesFlux
                 .collectList()
                 .map { ArticlesIO(it.map { article -> ArticleIO.fromModel(article) }, it.count()) }
     }
@@ -34,8 +38,9 @@ class ArticleController(@Autowired val service: ArticleService) {
     }
 
     @GetMapping("/api/articles/{slug}")
-    fun updateArticle(@PathVariable slug: String): Mono<ArticleIO> {
+    fun getArticleBySlug(@PathVariable slug: String): Mono<ArticleIO> {
         logger.info("Getting article for slug : $slug")
         return service.getArticleBySlug(slug).map { ArticleIO.fromModel(it) }
     }
+
 }

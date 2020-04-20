@@ -1,6 +1,6 @@
 package com.realworld.service
 
-import com.realworld.repository.ArticleRepository
+import com.realworld.repository.article.ArticleRepository
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 

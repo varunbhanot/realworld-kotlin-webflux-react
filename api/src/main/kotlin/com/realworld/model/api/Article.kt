@@ -16,7 +16,7 @@ data class Article(var title: String? = null,
                    var slug: String = "",
                    var createdAt: String = "",
                    var updatedAt: String = "",
-                   var favorited: Boolean = false,
+                   var favorited: String = "",
                    var favoritesCount: Int = 0,
                    var author: String = "") {
     companion object {
@@ -33,8 +33,8 @@ data class Article(var title: String? = null,
                     tagList = model.tagList,
                     createdAt = dateFormat(OffsetDateTime.of(model.createdAt, ZoneOffset.UTC)),
                     updatedAt = dateFormat(OffsetDateTime.of(model.updatedAt, ZoneOffset.UTC)),
-                    favorited = false,
-                    favoritesCount = 0,
+                    favorited = model.favorited,
+                    favoritesCount = model.favoritesCount,
                     author = model.authorName
             )
         }

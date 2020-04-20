@@ -15,6 +15,6 @@ data class ArticleBySlug(
         val tagList: List<String>,
         val createdAt: LocalDateTime,
         val updatedAt: LocalDateTime,
-        val favorited: Boolean,
+        val favorited: String,
         val favoritesCount: Int,
         val authorName: String)
