@@ -1,16 +1,20 @@
 package com.realworld.web
 
-import com.realworld.model.api.NewArticle
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
 import com.realworld.service.ArticleService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
 import com.realworld.model.api.Article as ArticleIO
 import com.realworld.model.api.Articles as ArticlesIO
+import com.realworld.model.api.NewArticle as NewArticleIO
 
-@RestController()
+
+@RestController
 class ArticleController(@Autowired val service: ArticleService) {
 
     private val logger = LoggerFactory.getLogger(ArticleController::class.java)
@@ -29,12 +33,13 @@ class ArticleController(@Autowired val service: ArticleService) {
                 .map { ArticlesIO(it.map { article -> ArticleIO.fromModel(article) }, it.count()) }
     }
 
-    //TODO  author, security, slug uniqueness
+    //TODO  security
     @PostMapping("/api/articles")
     @ResponseStatus(HttpStatus.CREATED)
-    fun newArticle(@RequestBody newArticle: NewArticle): Mono<com.realworld.model.api.Article> {
-        return service.saveNewArticle(newArticle)
-                .map { com.realworld.model.api.Article.fromModel(it) }
+    fun newArticle(@Validated @RequestBody newArticle: NewArticleIO): Mono<String?> {
+        val mapper = ObjectMapper()
+        mapper.enable(SerializationFeature.WRAP_ROOT_VALUE)
+        return service.saveNewArticle(newArticle).map { mapper.writeValueAsString(NewArticleIO.fromModel(it)) }
     }
 
     @GetMapping("/api/articles/{slug}")

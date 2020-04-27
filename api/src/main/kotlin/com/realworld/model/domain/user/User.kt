@@ -1,16 +1,15 @@
 package com.realworld.model.domain.user
 
-import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.data.cassandra.core.mapping.PrimaryKey
+import org.springframework.data.cassandra.core.mapping.Table
 
-
-data class User(var email: String = "",
-                @JsonIgnore
-                var password: String = "",
-                var token: String = "",
-                var username: String = "",
-                var bio: String = "",
-                var image: String = "",
-                @JsonIgnore
-                var follows: MutableList<User> = mutableListOf())  {
+@Table("users")
+data class User(val email: String,
+                val password: String,
+                val token: String,
+                @PrimaryKey val username: String,
+                val bio: String,
+                val image: String,
+                val follows: List<FollowedUser>) {
     override fun toString(): String = "User($email, $username)"
 }

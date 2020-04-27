@@ -7,8 +7,7 @@ import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
-@JsonTypeName("article")
-@JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
+
 data class Article(var title: String? = null,
                    var description: String? = null,
                    var body: String? = null,

@@ -32,10 +32,10 @@
             <version>${slugify.version}</version>
         </dependency>
 
-        	<dependency>
+        <!--	<dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-security</artifactId>
-            </dependency>
+            </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
@@ -83,7 +83,7 @@
             <scope>test</scope>
         </dependency>
         <!-- JWT dependencies -->
-        <dependency>
+      <!--  <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
             <version>0.10.5</version>
@@ -99,7 +99,7 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.10.5</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency>-->
         <!-- JWT dependencies -->
     </dependencies>
 
