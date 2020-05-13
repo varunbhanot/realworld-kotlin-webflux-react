@@ -1,7 +1,7 @@
 package com.realworld.service
 
 import com.github.slugify.Slugify
-import com.realworld.model.api.NewArticle
+import com.realworld.model.api.article.NewArticle
 import com.realworld.model.domain.article.Article
 import com.realworld.repository.article.ArticleByFavoritedRepository
 import com.realworld.repository.article.ArticleBySlugRepository

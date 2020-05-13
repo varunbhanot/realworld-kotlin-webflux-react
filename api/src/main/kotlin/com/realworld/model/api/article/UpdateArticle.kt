@@ -1,4 +1,4 @@
-package com.realworld.model.api
+package com.realworld.model.api.article
 
 import com.fasterxml.jackson.annotation.JsonRootName
 

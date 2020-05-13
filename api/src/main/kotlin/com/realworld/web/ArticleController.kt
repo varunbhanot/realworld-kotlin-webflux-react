@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import reactor.core.publisher.Mono
-import com.realworld.model.api.Article as ArticleIO
-import com.realworld.model.api.Articles as ArticlesIO
-import com.realworld.model.api.NewArticle as NewArticleIO
+import com.realworld.model.api.article.Article as ArticleIO
+import com.realworld.model.api.article.Articles as ArticlesIO
+import com.realworld.model.api.article.NewArticle as NewArticleIO
 
 
 @RestController

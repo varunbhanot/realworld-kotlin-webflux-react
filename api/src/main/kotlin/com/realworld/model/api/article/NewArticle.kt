@@ -1,8 +1,6 @@
-package com.realworld.model.api
+package com.realworld.model.api.article
 
 import com.fasterxml.jackson.annotation.JsonRootName
-import com.fasterxml.jackson.annotation.JsonTypeInfo
-import com.fasterxml.jackson.annotation.JsonTypeName
 import com.realworld.model.domain.article.Article
 import java.time.OffsetDateTime
 import java.time.ZoneId

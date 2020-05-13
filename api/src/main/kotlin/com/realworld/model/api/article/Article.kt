@@ -1,7 +1,5 @@
-package com.realworld.model.api
+package com.realworld.model.api.article
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo
-import com.fasterxml.jackson.annotation.JsonTypeName
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
